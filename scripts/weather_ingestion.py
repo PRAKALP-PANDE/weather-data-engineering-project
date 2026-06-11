@@ -21,4 +21,11 @@ print("Status Code:", response.status_code)
 
 weather_data = response.json()
 
-print(json.dumps(weather_data, indent=4))
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
+file_path = f"data/raw/weather_{CITY}_{timestamp}.json"
+
+with open(file_path, "w") as file:
+    json.dump(weather_data, file, indent=4)
+
+print(f"Data saved to {file_path}")
