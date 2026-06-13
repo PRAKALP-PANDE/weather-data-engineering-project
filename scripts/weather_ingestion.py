@@ -1,37 +1,42 @@
 import requests
-import json
-import os
-from datetime import datetime
-from dotenv import load_dotenv
 
-load_dotenv()
+from config import (
+    API_KEY,
+    CITIES,
+    BASE_URL
+)
 
-API_KEY = os.getenv("WEATHER_API_KEY")
+from utils import save_json
 
-CITIES = [
-    "Pune",
-    "Mumbai",
-    "Delhi",
-    "Bangalore",
-    "Hyderabad"
-]
 
 for city in CITIES:
-    
-    url = (
-        f"https://api.openweathermap.org/data/2.5/weather"
-        f"?q={city}&appid={API_KEY}&units=metric"
+
+    params = {
+        "q": city,
+        "appid": API_KEY,
+        "units": "metric"
+    }
+
+    response = requests.get(
+        BASE_URL,
+        params=params
     )
 
-    response = requests.get(url)
+    if response.status_code == 200:
 
-    weather_data = response.json()
+        weather_data = response.json()
 
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        file_path = save_json(
+            weather_data,
+            city
+        )
 
-    file_path = f"data/raw/weather_{city}_{timestamp}.json"
+        print(
+            f"SUCCESS: {city} -> {file_path}"
+        )
 
-    with open(file_path, "w") as file:
-        json.dump(weather_data, file, indent=4)
+    else:
 
-    print(f"Saved: {city}")
+        print(
+            f"FAILED: {city}"
+        )
