@@ -1,4 +1,5 @@
 import requests
+from datetime import datetime, timezone
 
 from config import (
     API_KEY,
@@ -26,9 +27,14 @@ for city in CITIES:
 
         weather_data = response.json()
 
+        timestamp = datetime.now(timezone.utc)
+
+        weather_data["ingestion_timestamp"] = timestamp.isoformat()
+
         file_path = save_json(
             weather_data,
-            city
+            city,
+            timestamp
         )
 
         print(
