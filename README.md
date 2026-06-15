@@ -52,11 +52,11 @@ Business-ready aggregations:
 
 ## Data Quality
 
-Implemented validations for:
+Implemented validation checks for:
 
-- Temperature Range
-- Humidity Range
-- Null City Validation
+- Temperature range validation
+- Humidity range validation
+- Null city validation
 
 
 ## Dashboard
