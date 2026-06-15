@@ -1,0 +1,47 @@
+Bronze = Raw Data
+Silver = Cleaned & Structured Data
+Gold = Analytics Ready
+
+
+---
+
+Why Delta?
+
+In interviews, mentioning Delta Lake immediately makes the project stronger.
+
+Delta gives:
+
+ACID Transactions
+Schema Enforcement
+Time Travel
+Efficient Updates
+
+These are common Databricks topics.
+
+
+---
+
+01_bronze_ingestion
+    Read JSON
+    Create bronze_df
+    Save weather_bronze
+
+        weather_bronze
+
+02_silver_transformation
+    Read weather_bronze
+    Flatten JSON
+    Convert timestamps
+    Create silver_df
+    Save weather_silver
+
+        weather_silver
+
+03_gold_analytics
+04_data_quality_checks
+05_incremental_processing
+06_dashboard_queries
+
+---
+
+Built an end-to-end weather data engineering pipeline using Python, Docker, Databricks, PySpark, Delta Lake, and Streamlit. Implemented Medallion Architecture (Bronze-Silver-Gold), data quality checks, incremental processing logic, and interactive dashboards to analyze weather trends across multiple cities.
